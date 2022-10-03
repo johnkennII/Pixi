@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "image": "1.avif",
+    "title": "Knight",
+    "username": "santosox",
+    "price": 3
+  },
+  {
+    "id": 2,
+    "image": "2.avif",
+    "title": "Daft Punk",
+    "username": "punix",
+    "price": 2
+  },
+  {
+    "id": 3,
+    "image": "avatar.avif",
+    "title": "Skater",
+    "username": "inoino",
+    "price": 9
+  },
+  {
+    "id": 4,
+    "image": "3.avif",
+    "title": "Grogu",
+    "username": "alexio",
+    "price": 7
+  },
+  {
+    "id": 5,
+    "image": "4.avif",
+    "title": "Foodies",
+    "username": "animola",
+    "price": 4
+  },
+  {
+    "id": 6,
+    "image": "5.avif",
+    "title": "Friends",
+    "username": "kunai",
+    "price": 80
+  },
+  {
+    "id": 6,
+    "image": "9.avif",
+    "title": "flow",
+    "username": "janken",
+    "price": 80
+  },
+  {
+    "id": 6,
+    "image": "10.avif",
+    "title": "box",
+    "username": "hive",
+    "price": 80
+  }
+]
