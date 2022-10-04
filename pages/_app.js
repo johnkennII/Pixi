@@ -2,7 +2,7 @@ import "../styles/globals.css";
 import { ThirdwebWeb3Provider } from "@3rdweb/hooks";
 import Layout from "../components/layout";
 
-const supportedChainIds = [1337, 80001];
+const supportedChainIds = [1337, 80001, 43114];
 const connectors = {
   injected: {},
 };

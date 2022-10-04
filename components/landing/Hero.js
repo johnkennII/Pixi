@@ -1,7 +1,7 @@
-import Button from './Button'
-import Image from 'next/image'
-import Avatar from '../../assets/pic7.svg'
-import Spline from '@splinetool/react-spline'
+import Button from "./Button";
+import Image from "next/image";
+import Avatar from "../../assets/pic7.svg";
+import Spline from "@splinetool/react-spline";
 
 export default function Hero() {
   return (
@@ -14,12 +14,13 @@ export default function Hero() {
             data-aos-duration="2000"
           >
             <h1 className="text-5xl text-center md:text-left md:text-8xl text-white">
-              Blockchain <span className="text-white">Defacto</span> <br />
-              <span className='pb-3 block bg-clip-text text-transparent bg-gradient-to-r from-teal-200 to-cyan-400 sm:pb-5'>For charities</span>{' '}
+              Play-to-Own <span className="text-white">Game</span> <br />
+              <span className="pb-3 block bg-clip-text text-transparent bg-gradient-to-r from-teal-200 to-cyan-400 sm:pb-5">
+                For Everyone
+              </span>{" "}
             </h1>
             <p className="text-white md:text-xl">
-              Cultchain is a Blockchain based charity which aims to bring
-              transparency and Trust to charities and NGOs.
+              Building Play-to-Own For Everyone
             </p>
           </div>
           <div>
@@ -28,5 +29,5 @@ export default function Hero() {
         </div>
       </div>
     </>
-  )
+  );
 }

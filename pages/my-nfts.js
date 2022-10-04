@@ -1,17 +1,18 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import { ethers } from "ethers";
+import Web3 from "web3";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Web3Modal from "web3modal";
 import { useRouter } from "next/router";
 
-import { marketplaceAddress } from "../config";
-
-import NFTMarketplace from "../artifacts/contracts/Marketplace.sol/NFTMarketplace.json";
-import Footer from "../components/landing/Footer";
+import Marketplace from "../artifacts/contracts/Marketplace.sol/Marketplace.json";
+import PixionGamesToken from "../artifacts/contracts/PGToken.sol/PixionGamesToken.json";
 
 export default function MyAssets() {
+  const marketplaceAddress = process.env.MARKETPLACE_ADDRESS;
+  const pixionGamesTokenAddress = process.env.NFT_ADDRESS;
   const [nfts, setNfts] = useState([]);
   const [loadingState, setLoadingState] = useState("not-loaded");
   const router = useRouter();
@@ -19,20 +20,23 @@ export default function MyAssets() {
     loadNFTs();
   }, []);
   async function loadNFTs() {
-    const web3Modal = new Web3Modal({
-      network: "mainnet",
-      cacheProvider: true,
-    });
+    const web3Modal = new Web3Modal();
     const connection = await web3Modal.connect();
     const provider = new ethers.providers.Web3Provider(connection);
-    const signer = provider.getSigner();
-
     const marketplaceContract = new ethers.Contract(
       marketplaceAddress,
-      NFTMarketplace.abi,
-      signer
+      Marketplace.abi,
+      provider
     );
-    const data = await marketplaceContract.fetchMyNFTs();
+    const pixionGamesTokenContract = new ethers.Contract(
+      pixionGamesTokenAddress,
+      PixionGamesToken.abi,
+      provider
+    );
+
+    const web3 = new Web3(connection);
+    var accounts = await web3.eth.getAccounts();
+    const data = await marketplaceContract.fetchUserNFTs(accounts[0]);
 
     const items = await Promise.all(
       data.map(async (i) => {
@@ -59,8 +63,14 @@ export default function MyAssets() {
   if (loadingState === "loaded" && !nfts.length)
     return <h1 className="py-10 px-20 text-3xl">No NFTs owned</h1>;
   return (
-    <div className="flex justify-center" style={{ background: "linear-gradient(125deg, rgb(17, 10, 38), #542167, #34c2ac)",
-    backgroundRepeat: "no-repeat"}}>
+    <div
+      className="flex justify-center"
+      style={{
+        background:
+          "linear-gradient(125deg, rgb(17, 10, 38), #542167, #34c2ac)",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       <div className="p-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
           {nfts.map((nft, i) => (
@@ -81,8 +91,6 @@ export default function MyAssets() {
           ))}
         </div>
       </div>
-     
     </div>
-    
   );
 }

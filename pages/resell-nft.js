@@ -6,11 +6,12 @@ import Image from "next/image";
 import axios from "axios";
 import Web3Modal from "web3modal";
 
-import { marketplaceAddress } from "../config";
-
-import NFTMarketplace from "../artifacts/contracts/Marketplace.sol/NFTMarketplace.json";
+import Marketplace from "../artifacts/contracts/Marketplace.sol/Marketplace.json";
+import PixionGamesToken from "../artifacts/contracts/PGToken.sol/PixionGamesToken.json";
 
 export default function ResellNFT() {
+  const marketplaceAddress = process.env.MARKETPLACE_ADDRESS;
+  const pixionGamesTokenAddress = process.env.NFT_ADDRESS;
   const [formInput, updateFormInput] = useState({ price: "", image: "" });
   const router = useRouter();
   const { id, tokenURI } = router.query;
@@ -34,14 +35,17 @@ export default function ResellNFT() {
     const signer = provider.getSigner();
 
     const priceFormatted = ethers.utils.parseUnits(formInput.price, "ether");
-    let contract = new ethers.Contract(
+    const marketplaceContract = new ethers.Contract(
       marketplaceAddress,
-      NFTMarketplace.abi,
-      signer
+      Marketplace.abi,
+      provider
     );
-    let listingPrice = await contract.getListingPrice();
+    const pixionGamesTokenContract = new ethers.Contract(
+      pixionGamesTokenAddress,
+      PixionGamesToken.abi,
+      provider
+    );
 
-    listingPrice = listingPrice.toString();
     let transaction = await contract.resellToken(id, priceFormatted, {
       value: listingPrice,
     });

@@ -1,5 +1,5 @@
 import { FaArrowRight } from "react-icons/fa";
-import Logo from '../../assets/cultchain.svg'
+import Logo from '../../assets/piximarket.svg'
 import Image from 'next/image';
 export default function Footer() {
   return (

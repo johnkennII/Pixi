@@ -1,32 +1,34 @@
-/* hardhat.config.js */
-require("@nomiclabs/hardhat-waffle");
-privateKey = process.env.TEST_PRIVATE_KEY;
+require("@nomiclabs/hardhat-ethers");
+require("@nomicfoundation/hardhat-toolbox");
+require("@openzeppelin/hardhat-upgrades");
 
+require("dotenv").config();
+
+/** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
+  solidity: "0.8.9",
   defaultNetwork: "hardhat",
-  networks: {
-    hardhat: {
-      chainId: 1337,
-    },
-    mumbai: {
-      url: `https://polygon-mumbai.g.alchemy.com/v2/${process.env.TEST_ALCHEMY_API_KEY}`,
-      accounts: [privateKey],
-      gas: 2100000,
-      gasPrice: 8000000000,
-      saveDeployments: true,
-    },
-    mainnet: {
-      url: `https://polygon-mainnet.g.alchemy.com/v2/${process.env.MAIN_ALCHEMY_API_KEY}`,
-      accounts: [privateKey],
+  etherscan: {
+    apiKey: {
+      avalancheFujiTestnet: [process.env.SNOWTRACE_APIKEY],
     },
   },
-  solidity: {
-    version: "0.8.4",
-    settings: {
-      optimizer: {
-        enabled: true,
-        runs: 200,
-      },
+  networks: {
+    hardhat: {
+      gasPrice: 225000000000,
+      chainId: 43114,
+    },
+    fuji: {
+      url: "https://api.avax-test.network/ext/bc/C/rpc",
+      gasPrice: 225000000000,
+      chainId: 43113,
+      accounts: [process.env.PRIVATE_KEY_FUJI], // accounts: { mnemonic: MNEMONIC },
+    },
+    mainnet: {
+      url: "https://api.avax.network/ext/bc/C/rpc",
+      gasPrice: 225000000000,
+      chainId: 43114,
+      accounts: [process.env.PRIVATE_KEY_MAINNET], // accounts: { mnemonic: MNEMONIC },
     },
   },
 };

@@ -4,12 +4,13 @@ import { BiHeart } from "react-icons/bi";
 import { useRouter } from "next/router";
 import Web3Modal from "web3modal";
 import { ethers } from "ethers";
-import { marketplaceAddress } from "../config";
 
-import NFTMarketplace from "../artifacts/contracts/Marketplace.sol/NFTMarketplace.json";
-
+import Marketplace from "../artifacts/contracts/Marketplace.sol/Marketplace.json";
+import PixionGamesToken from "../artifacts/contracts/PGToken.sol/PixionGamesToken.json";
 
 const NFTCards = ({ nftItem, loadNFTs }) => {
+  const marketplaceAddress = process.env.MARKETPLACE_ADDRESS;
+  const pixionGamesTokenAddress = process.env.NFT_ADDRESS;
   const router = useRouter();
 
   async function buyNFT(nft) {
@@ -45,13 +46,14 @@ const NFTCards = ({ nftItem, loadNFTs }) => {
               ? nftItem.authorImg
               : "https://dailygazette.com/wp-content/uploads/fly-images/132597/APTOPIX_Bitcoin_Found_ONe-scaled-940x940.jpg"
           }
-        
-          />
+        />
       </div>
       <div className="p-3 mt-[-1rem]">
         <div className="flex justify-between text-[#e4e8eb] drop-shadow-xl">
           <div className="flex-0.6 flex-wrap">
-            <div className="font-semibold text-sm text-[#8a939b]">{nftItem.collection}</div>
+            <div className="font-semibold text-sm text-[#8a939b]">
+              {nftItem.collection}
+            </div>
             <div className="font-bold text-lg mt-2">{nftItem.name}</div>
             <div>
               <button
