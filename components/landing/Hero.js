@@ -1,12 +1,15 @@
-import Button from "./Button";
 import Image from "next/image";
-import Avatar from "../../assets/pic7.svg";
-import Spline from "@splinetool/react-spline";
+import Avatar from "../../assets/avatar1.jpg";
+
+
+
+
+
 
 export default function Hero() {
   return (
     <>
-      <div className=" py-20 md:py-24 h-[700px]">
+      <div className="py-20 md:py-24 h-[700px]">
         <div className="grid grid-cols-1 md:grid-cols-2 container mx-auto">
           <div
             className="flex flex-col gap-8 text-center items-center md:text-left md:items-start"
@@ -24,7 +27,8 @@ export default function Hero() {
             </p>
           </div>
           <div>
-            <Image src={Avatar} alt="avatar" width={600} height={500} />
+         
+            <Image src={Avatar} alt="avatar"  />
           </div>
         </div>
       </div>

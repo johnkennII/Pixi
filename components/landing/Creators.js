@@ -29,14 +29,14 @@ export default function Creators() {
            
          />
             <div className="">
-              <p className="text-lg md:text-2xl text-transparent  bg-clip-text bg-gradient-to-r from-purple-600 to-pink-400  font-semibold">
+              <p className="text-lg md:text-2xl text-white  font-semibold">
                 {item.name}
               </p>
               <div className="flex items-center gap-2">
                 <div className="bg-[#542167] p-1 md:p-2 mt-1 rounded-full">
-                  <FaEthereum color="#34c2ac" size="1rem" />
+                  <FaEthereum color="white" size="1rem" />
                 </div>
-                <p className="text-[#3b0351]  text-xs md:text-base">{item.value}</p>
+                <p className="text-white  text-xs md:text-base">{item.value}</p>
               </div>
             </div>
           </div>
@@ -58,14 +58,14 @@ export default function Creators() {
               className="rounded-full w-1/4 md:w-auto"
             />
             <div className="text-tertiary">
-              <p className="font-primary text-lg md:text-2xl font-semibold text-transparent  bg-clip-text bg-gradient-to-r from-purple-600 to-pink-400">
+              <p className="font-primary text-lg md:text-2xl font-semibold text-white">
                 {item.name}
               </p>
               <div className="flex items-center gap-2">
                 <div className="bg-[#542167] p-1 md:p-2 mt-1 rounded-full">
-                  <FaEthereum color="#34c2ac" size="1rem" />
+                  <FaEthereum color="white" size="1rem" />
                 </div>
-                <p className="text-xs md:text-base text-[#3b0351]">{item.value}</p>
+                <p className="text-xs md:text-base text-white">{item.value}</p>
               </div>
             </div>
           </div>

@@ -1,8 +1,7 @@
 import Button from './Button'
-import { FaEthereum } from 'react-icons/fa'
-import Avax from '../../assets/pic7.svg'
 import { GrView } from 'react-icons/gr'
 import data from '../../data/item-nft.json'
+import { GiCrownCoin } from 'react-icons/gi'
 
 export default function Collections() {
   return (
@@ -21,18 +20,14 @@ export default function Collections() {
         <div className="grid grid-cols-4 gap-4">
           {data.map((item, index) => {
             return (
-              <div
-                key={index}
-                data-aos="fade-up"
-                data-aos-duration="3000"
-              >
+              <div key={index} data-aos="fade-up" data-aos-duration="3000">
                 <div className="bg-[#2f302f]  rounded-2xl flex flex-col  hover:scale-105 transition-all cursor-pointer  w-[280px] h-[300px]">
                   <div className="flex  absolute p-2">
                     <button className="bg-[#2f302f] h-8 p-1 rounded-lg text-white text-xs">
                       {item.price} Avax
                     </button>
                     <div className="bg-[#2f302f] p-2 rounded-full ml-44">
-                      <img src={Avax} alt='avax'/>
+                      <GiCrownCoin color="#f44336" />
                     </div>
                   </div>
                   <img
@@ -44,26 +39,25 @@ export default function Collections() {
                     <h6 className="font-primary text-white font-bold text-xl md:text-xl">
                       {item.title}
                     </h6>
-                    <p className="text-[#797d7b]">@{item.username}</p>
+                    <p className="text-[#797d7b]">
+                      <GrView
+                        color="#ECDBBA"
+                        size=".8rem"
+                        style={{
+                          position: 'absolute',
+                          marginLeft: '-17px',
+                          marginTop: '5px',
+                        }}
+                      />
+                      {item.username}
+                    </p>
                   </div>
                   <div className="p-2 flex justify-between">
                     <h6 className="font-primary text-[#7f8281] font-bold text-sm md:text-sm">
                       440likes
-                    </h6>
-                    <div className="flex">
-                      <GrView color="#ECDBBA" size=".8rem" />
-                      <span
-                        style={{
-                          color: '#7f8281',
-                          marginLeft: '3px',
-                          fontSize: 10,
-                        }}
-                      >
-                        420k
-
-                      </span>
                       
-                    </div>
+                    </h6>
+                    <button className='bg-[#7f8281] w-14 h-5 text-white rounded-md'>Sell</button>
                   </div>
                 </div>
               </div>

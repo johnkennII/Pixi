@@ -24,7 +24,7 @@ export default function Button(props) {
   return (
     <a
       href="#x"
-      className={` ${sizeBtn()} ${variantBtn()} tracking-wider  font-bold border-2 border-pink-400 hover:text-purple-600 rounded-full transition-all text-transparent  bg-clip-text bg-gradient-to-r from-purple-600 to-pink-400`}
+      className={` ${sizeBtn()} ${variantBtn()} tracking-wider  font-bold border-2 border-pink-100 hover:text-purple-600 rounded-full transition-all text-white`}
     >
       {text}
     </a>
