@@ -1,5 +1,6 @@
 import Button from './Button'
 import { FaEthereum } from 'react-icons/fa'
+import Avax from '../../assets/pic7.svg'
 import { GrView } from 'react-icons/gr'
 import data from '../../data/item-nft.json'
 
@@ -28,10 +29,10 @@ export default function Collections() {
                 <div className="bg-[#2f302f]  rounded-2xl flex flex-col  hover:scale-105 transition-all cursor-pointer  w-[280px] h-[300px]">
                   <div className="flex  absolute p-2">
                     <button className="bg-[#2f302f] h-8 p-1 rounded-lg text-white text-xs">
-                      {item.price} ETH
+                      {item.price} Avax
                     </button>
                     <div className="bg-[#2f302f] p-2 rounded-full ml-44">
-                      <FaEthereum color="#ECDBBA" size="1rem" />
+                      <img src={Avax} alt='avax'/>
                     </div>
                   </div>
                   <img
@@ -59,7 +60,9 @@ export default function Collections() {
                         }}
                       >
                         420k
+
                       </span>
+                      
                     </div>
                   </div>
                 </div>
