@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import { BiHeart } from "react-icons/bi";
 import { useRouter } from "next/router";
 import Web3Modal from "web3modal";
@@ -43,23 +42,14 @@ const NFTCards = ({ nftItem, loadNFTs }) => {
       <div className="h-2/3 w-full overflow-hidden flex justify-center items-center">
         <img src={nftItem.image} alt="" />
       </div>
-      <div className="w-full flex justify-center text-white">
-        <img
-          className="w-10 h-10 object-cover rounded-full border-2 border-[#202225] mt-[-1rem]"
-          src={
-            nftItem?.authorImg
-              ? nftItem.authorImg
-              : "https://dailygazette.com/wp-content/uploads/fly-images/132597/APTOPIX_Bitcoin_Found_ONe-scaled-940x940.jpg"
-          }
-        />
-      </div>
+   
       <div className="p-3 mt-[-1rem]">
         <div className="flex justify-between text-[#e4e8eb] drop-shadow-xl">
           <div className="flex-0.6 flex-wrap">
             <div className="font-semibold text-sm text-[#8a939b]">
               {nftItem.collection}
             </div>
-            <div className="font-bold text-lg mt-2">{nftItem.name}</div>
+            <div className="font-bold text-lg mt-4">{nftItem.name}</div>
             <div>
               <button
                 className="flex mt-3 items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -70,14 +60,14 @@ const NFTCards = ({ nftItem, loadNFTs }) => {
             </div>
           </div>
           <div className="flex-0.4 text-right">
-            <div className="font-semibold text-sm text-[#8a939b]">Price</div>
-            <div className="flex items-center text-xl font-bold mt-2">
+            <div className="font-semibold text-sm text-[#8a939b] mt-5">Price</div>
+            <div className="flex items-center text-xl font-bold  mt-5">
               <img
-                src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg"
+                src="https://cryptologos.cc/logos/avalanche-avax-logo.png"
                 alt="eth"
                 className="h-5 mr-2"
               />
-              {nftItem.price}
+             <span >{nftItem.price}</span>
             </div>
             <div className="text-[#8a939b] font-bold flex items-center w-full justify-end mt-4">
               <span className="text-xl mr-2">
