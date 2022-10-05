@@ -102,9 +102,9 @@ export default function MarketplaceConfig() {
   }
 
   return (
-    <div className="flex justify-center">
+    <div className=" bg-gray-600 flex flex-col justify-center items-center">
       <div className="w-1/2 flex flex-col pb-12">
-        <h1>Change Presale Time</h1>
+        <h1 className="text-white font-extrabold text-2xl mt-5">Change Presale Time</h1>
         <input
           placeholder="Presale Starting Timestamp"
           className="mt-8 border rounded p-4"
@@ -135,7 +135,7 @@ export default function MarketplaceConfig() {
         </button>
       </div>
       <div className="w-1/2 flex flex-col pb-12">
-        <h1>Whitelist User</h1>
+        <h1 className="text-white font-extrabold text-2xl">Whitelist User</h1>
         <input
           placeholder="User Address"
           className="mt-8 border rounded p-4"
@@ -155,7 +155,7 @@ export default function MarketplaceConfig() {
         </button>
       </div>
       <div className="w-1/2 flex flex-col pb-12">
-        <h1>Permissions</h1>
+        <h1 className="text-white font-extrabold text-2xl">Permissions</h1>
         <input
           placeholder="User Address"
           className="mt-8 border rounded p-4"
