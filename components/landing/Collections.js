@@ -50,7 +50,7 @@ export default function Collections() {
               </button>
               <h6 className="font-primary text-[#7f8281] font-bold text-sm md:text-sm flex">
                     <span>12</span>
-                    <BiHeart  className=''/>
+                    <BiHeart  className='mt-1'/>
                     </h6>
                   </div>
                 </div>
