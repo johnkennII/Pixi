@@ -8,38 +8,37 @@ import Web3Modal from "web3modal";
 import { useRouter } from "next/router";
 
 import Marketplace from "../artifacts/contracts/Marketplace.sol/Marketplace.json";
-import PixionGamesToken from "../artifacts/contracts/PGToken.sol/PixionGamesToken.json";
 
 export default function MyAssets() {
   const marketplaceAddress = process.env.MARKETPLACE_ADDRESS;
-  const pixionGamesTokenAddress = process.env.NFT_ADDRESS;
   const [nfts, setNfts] = useState([]);
   const [loadingState, setLoadingState] = useState("not-loaded");
   const router = useRouter();
   useEffect(() => {
     loadNFTs();
   }, []);
+
   async function loadNFTs() {
-    const web3Modal = new Web3Modal();
+    const web3Modal = new Web3Modal({
+      network: "mainnet",
+      cacheProvider: true,
+    });
     const connection = await web3Modal.connect();
     const provider = new ethers.providers.Web3Provider(connection);
+    const signer = provider.getSigner();
+
     const marketplaceContract = new ethers.Contract(
       marketplaceAddress,
       Marketplace.abi,
-      provider
-    );
-    const pixionGamesTokenContract = new ethers.Contract(
-      pixionGamesTokenAddress,
-      PixionGamesToken.abi,
-      provider
+      signer
     );
 
-    const web3 = new Web3(connection);
-    var accounts = await web3.eth.getAccounts();
-    const data = await marketplaceContract.fetchUserNFTs(accounts[0]);
+    const data = await marketplaceContract.fetchMyNFTs();
 
     const items = await Promise.all(
       data.map(async (i) => {
+        console.log("Reading Dta");
+
         const tokenURI = await marketplaceContract.tokenURI(i.tokenId);
         const meta = await axios.get(tokenURI);
         let price = ethers.utils.formatUnits(i.price.toString(), "ether");
@@ -48,6 +47,7 @@ export default function MyAssets() {
           tokenId: i.tokenId.toNumber(),
           seller: i.seller,
           owner: i.owner,
+          isPresale: i.isPresale,
           image: meta.data.image,
           tokenURI,
         };

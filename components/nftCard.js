@@ -1,13 +1,11 @@
 import Image from "next/image";
 import Marketplace from "../artifacts/contracts/Marketplace.sol/Marketplace.json";
-import PixionGamesToken from "../artifacts/contracts/PGToken.sol/PixionGamesToken.json";
 
 import { useRouter } from "next/router";
 import connect from "../utils/auth";
 
 export default function NFTCard({ nft, buyable }) {
   const marketplaceAddress = process.env.MARKETPLACE_ADDRESS;
-  const pixionGamesTokenAddress = process.env.NFT_ADDRESS;
   const router = useRouter();
 
   async function buyNFT() {
@@ -15,11 +13,6 @@ export default function NFTCard({ nft, buyable }) {
     const marketplaceContract = new ethers.Contract(
       marketplaceAddress,
       Marketplace.abi,
-      provider
-    );
-    const pixionGamesTokenContract = new ethers.Contract(
-      pixionGamesTokenAddress,
-      PixionGamesToken.abi,
       provider
     );
     const price = ethers.utils.parseUnits(nft.price.toString(), "ether");

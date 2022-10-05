@@ -24,11 +24,9 @@ const client = ipfsClient.create({
 });
 
 import Marketplace from "../artifacts/contracts/Marketplace.sol/Marketplace.json";
-import PixionGamesToken from "../artifacts/contracts/PGToken.sol/PixionGamesToken.json";
 
 export default function CreateItem() {
   const marketplaceAddress = process.env.MARKETPLACE_ADDRESS;
-  const pixionGamesTokenAddress = process.env.NFT_ADDRESS;
   const [value, setValue] = useState("default");
   const [fileUrl, setFileUrl] = useState(null);
   const [formInput, updateFormInput] = useState({
@@ -91,23 +89,18 @@ export default function CreateItem() {
       Marketplace.abi,
       signer
     );
-    const pixionGamesTokenContract = new ethers.Contract(
-      pixionGamesTokenAddress,
-      PixionGamesToken.abi,
-      signer
+
+    console.log("Code:", provider.getCode(marketplaceAddress));
+
+    console.log("Marketplace Address", marketplaceContract.address);
+
+    let mintTransaction = await marketplaceContract.createToken(
+      url,
+      price,
+      true
     );
 
-    console.log(pixionGamesTokenContract.address);
-
-    let mintTransaction = await pixionGamesTokenContract.mint(url);
-
     await mintTransaction.wait();
-    console.log(mintTransaction);
-    console.log(mintTransaction.toString());
-
-    // let createMarketTransaction = await marketplaceContract.createMarketItem(
-    //   pixionGamesTokenContract.address,
-    // )
 
     router.push("/");
   }
@@ -130,7 +123,7 @@ export default function CreateItem() {
           }
         />
         <input
-          placeholder="Asset Price in Eth"
+          placeholder="Asset Price in Avax"
           className="mt-2 border rounded p-4"
           onChange={(e) =>
             updateFormInput({ ...formInput, price: e.target.value })
