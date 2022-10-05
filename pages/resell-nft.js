@@ -38,12 +38,12 @@ export default function ResellNFT() {
     const marketplaceContract = new ethers.Contract(
       marketplaceAddress,
       Marketplace.abi,
-      provider
+      signer
     );
     const pixionGamesTokenContract = new ethers.Contract(
       pixionGamesTokenAddress,
       PixionGamesToken.abi,
-      provider
+      signer
     );
 
     let transaction = await contract.resellToken(id, priceFormatted, {

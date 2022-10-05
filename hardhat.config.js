@@ -16,7 +16,8 @@ module.exports = {
   networks: {
     hardhat: {
       gasPrice: 225000000000,
-      chainId: 43114,
+      chainId: 1337,
+      account: process.env.PRIVATE_KEY_LOCAL,
     },
     fuji: {
       url: "https://api.avax-test.network/ext/bc/C/rpc",

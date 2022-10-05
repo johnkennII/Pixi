@@ -7,7 +7,6 @@ import Web3Modal from "web3modal";
 import NFTCards from "../components/NFTCards";
 
 import Marketplace from "../artifacts/contracts/Marketplace.sol/Marketplace.json";
-import PixionGamesToken from "../artifacts/contracts/PGToken.sol/PixionGamesToken.json";
 
 const style = {
   wrapper: ``,
@@ -18,7 +17,6 @@ const style = {
 
 export default function Explore() {
   const marketplaceAddress = process.env.MARKETPLACE_ADDRESS;
-  const pixionGamesTokenAddress = process.env.NFT_ADDRESS;
   const { address, connectWallet } = useWeb3();
   const [nfts, setNfts] = useState([]);
   const [loadingState, setLoadingState] = useState("not-loaded");
@@ -38,20 +36,16 @@ export default function Explore() {
       Marketplace.abi,
       provider
     );
-    const pixionGamesTokenContract = new ethers.Contract(
-      pixionGamesTokenAddress,
-      PixionGamesToken.abi,
-      provider
-    );
+
     const data = await marketplaceContract.fetchMarketItems();
 
     const items = await Promise.all(
       data.map(async (i) => {
-        const tokenUri = await pixionGamesTokenContract.tokenURI(i.tokenId);
+        const tokenUri = await marketplaceContract.tokenURI(i.tokenId);
         const meta = await axios.get(tokenUri);
         let price = ethers.utils.formatUnits(i.price.toString(), "ether");
+        console.log("Item price:", price);
         let item = {
-          itemId: i.itemId.toNumber(),
           price,
           tokenId: i.tokenId.toNumber(),
           seller: i.seller,

@@ -49,13 +49,13 @@ export default function Nav() {
                 </div>
               </Link>
             </li>
-            <li className="py-2 md:py-0">
+            {/* <li className="py-2 md:py-0">
               <Link href="/presale">
                 <div className="text-white px-4 font-bold  hover:text-white cursor-pointer">
                   Presale
                 </div>
               </Link>
-            </li>
+            </li> */}
             <li className="py-2 md:py-0">
               <Link href="/create-nft">
                 <div className="text-white px-4 font-bold  hover:text-white cursor-pointer">
@@ -71,7 +71,7 @@ export default function Nav() {
               </Link>
             </li>
             <li className="py-2 md:py-0">
-              <Link href="/marketplace-conf">
+              <Link href="/marketplace_config">
                 <div className="text-white px-4 font-bold  hover:text-white cursor-pointer">
                   Config
                 </div>
