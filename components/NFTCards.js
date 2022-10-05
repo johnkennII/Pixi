@@ -22,16 +22,9 @@ const NFTCards = ({ nftItem, loadNFTs }) => {
       signer
     );
 
-    let timeTransaction = await contract.TimedCrowdsale(
-      1664894664,
-      1664904664,
-      100
-    );
-    await timeTransaction.wait();
-
     /* user will be prompted to pay the asking proces to complete the transaction */
     const price = ethers.utils.parseUnits(nft.price.toString(), "ether");
-    const transaction = await contract.createMarketItem(nft.tokenId, {
+    const transaction = await contract.createMarketSale(nft.tokenId, {
       value: price,
     });
     await transaction.wait();
@@ -42,7 +35,7 @@ const NFTCards = ({ nftItem, loadNFTs }) => {
       <div className="h-2/3 w-full overflow-hidden flex justify-center items-center">
         <img src={nftItem.image} alt="" />
       </div>
-   
+
       <div className="p-3 mt-[-1rem]">
         <div className="flex justify-between text-[#e4e8eb] drop-shadow-xl">
           <div className="flex-0.6 flex-wrap">
@@ -60,14 +53,16 @@ const NFTCards = ({ nftItem, loadNFTs }) => {
             </div>
           </div>
           <div className="flex-0.4 text-right">
-            <div className="font-semibold text-sm text-[#8a939b] mt-5">Price</div>
+            <div className="font-semibold text-sm text-[#8a939b] mt-5">
+              Price
+            </div>
             <div className="flex items-center text-xl font-bold  mt-5">
               <img
                 src="https://cryptologos.cc/logos/avalanche-avax-logo.png"
                 alt="eth"
                 className="h-5 mr-2"
               />
-             <span >{nftItem.price}</span>
+              <span>{nftItem.price}</span>
             </div>
             <div className="text-[#8a939b] font-bold flex items-center w-full justify-end mt-4">
               <span className="text-xl mr-2">

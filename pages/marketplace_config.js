@@ -42,6 +42,12 @@ export default function MarketplaceConfig() {
   });
   const { permissionedAddress, permission } = permissionFormInput;
 
+  const [royaltyFormInput, updateRoyaltyFormInput] = useState({
+    royaltyReceiverAddress: 0,
+    royaltyCut: 0,
+  });
+  const { royaltyReceiverAddress, royaltyCut } = royaltyFormInput;
+
   const router = useRouter();
 
   async function GrantPermission() {
@@ -79,6 +85,29 @@ export default function MarketplaceConfig() {
     await transaction.wait();
   }
 
+  async function royaltyConfig() {
+    const web3Modal = new Web3Modal();
+    const connection = await web3Modal.connect();
+    const provider = new ethers.providers.Web3Provider(connection);
+    const signer = provider.getSigner();
+
+    /* create the NFT */
+    const contract = new ethers.Contract(
+      marketplaceAddress,
+      Marketplace.abi,
+      signer
+    );
+
+    console.log("reciever", royaltyReceiverAddress);
+
+    let transaction = await contract.setDefaultRoyaltyInfo(
+      royaltyReceiverAddress,
+      royaltyCut
+    );
+
+    await transaction.wait();
+  }
+
   async function changePresaleTime() {
     const web3Modal = new Web3Modal();
     const connection = await web3Modal.connect();
@@ -104,7 +133,9 @@ export default function MarketplaceConfig() {
   return (
     <div className=" bg-gray-600 flex flex-col justify-center items-center">
       <div className="w-1/2 flex flex-col pb-12">
-        <h1 className="text-white font-extrabold text-2xl mt-5">Change Presale Time</h1>
+        <h1 className="text-white font-extrabold text-2xl mt-5">
+          Change Presale Time
+        </h1>
         <input
           placeholder="Presale Starting Timestamp"
           className="mt-8 border rounded p-4"
@@ -202,6 +233,37 @@ export default function MarketplaceConfig() {
           className="font-bold mt-4 bg-pink-500 text-white rounded p-4 shadow-lg"
         >
           Grant Permission
+        </button>
+      </div>
+      <div className="w-1/2 flex flex-col pb-12">
+        <h1 className="text-white font-extrabold text-2xl">Royalty Config</h1>
+        <input
+          placeholder="Royalty Cut Receiver Address"
+          className="mt-8 border rounded p-4"
+          onChange={(e) =>
+            updateRoyaltyFormInput({
+              ...royaltyFormInput,
+              royaltyReceiverAddress: e.target.value,
+            })
+          }
+        />
+
+        <input
+          placeholder="Royalty Cut 1...1000"
+          className="mt-8 border rounded p-4"
+          onChange={(e) =>
+            updateRoyaltyFormInput({
+              ...royaltyFormInput,
+              royaltyCut: e.target.value,
+            })
+          }
+        />
+
+        <button
+          onClick={royaltyConfig}
+          className="font-bold mt-4 bg-pink-500 text-white rounded p-4 shadow-lg"
+        >
+          Set Royalty Config
         </button>
       </div>
     </div>
