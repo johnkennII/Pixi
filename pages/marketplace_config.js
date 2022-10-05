@@ -6,8 +6,7 @@ import Web3Modal from "web3modal";
 
 import Marketplace from "../artifacts/contracts/Marketplace.sol/Marketplace.json";
 
-var options = [];
-options.push(
+const options = [
   {
     value: 0x0000000000000000000000000000000000000000000000000000000000000000,
     label: "ADMIN",
@@ -19,8 +18,8 @@ options.push(
   {
     value: 0x8f3e3ec85be8136ab597ba63347c6a7b5ee4354f5c67cfa9fe9fc93392fd3b0d,
     label: "SUPER",
-  }
-);
+  },
+];
 
 export default function MarketplaceConfig() {
   const marketplaceAddress = process.env.MARKETPLACE_ADDRESS;
@@ -37,7 +36,7 @@ export default function MarketplaceConfig() {
   const { address } = whitelistFormInput;
 
   const [permissionFormInput, updatePermissionFormInput] = useState({
-    permissionedAddress: 0,
+    permissionedAddress: "",
     permission: 0,
   });
   const { permissionedAddress, permission } = permissionFormInput;
@@ -62,10 +61,22 @@ export default function MarketplaceConfig() {
       Marketplace.abi,
       signer
     );
+    var permisionbytes =
+      "0x0000000000000000000000000000000000000000000000000000000000000000";
+    if (permission == 2) {
+      permisionbytes =
+        "0x9f2df0fed2c77648de5860a4cc508cd0818c85b8b8a1ab4ceeef8d981c8956a6";
+    }
+    if (permission == 3) {
+      permisionbytes =
+        "0x8f3e3ec85be8136ab597ba63347c6a7b5ee4354f5c67cfa9fe9fc93392fd3b0d";
+    }
+    console.log(permission);
 
-    console.log(permission)
-
-    let transaction = await contract.grantRole(permission, permissionedAddress);
+    let transaction = await contract.grantRole(
+      permisionbytes,
+      permissionedAddress
+    );
     await transaction.wait();
   }
 
@@ -217,7 +228,7 @@ export default function MarketplaceConfig() {
             onChange={(e) =>
               updatePermissionFormInput({
                 ...permissionFormInput,
-                collection: e.target.options.selectedIndex,
+                permission: e.target.options.selectedIndex,
               })
             }
           >
