@@ -2,57 +2,57 @@
   {
     "id": 1,
     "image": "1.avif",
-    "title": "Knight",
-    "username": "120k",
+    "title": "Price",
+    "username": "10",
     "price": 3
   },
   {
     "id": 2,
     "image": "2.avif",
-    "title": "Daft Punk",
-    "username": "135k",
+    "title": "Price",
+    "username": "5",
     "price": 2
   },
   {
     "id": 3,
     "image": "avatar.avif",
-    "title": "Skater",
-    "username": "142k",
+    "title": "Price",
+    "username": "4",
     "price": 9
   },
   {
     "id": 4,
     "image": "3.avif",
-    "title": "Grogu",
-    "username": "98k",
+    "title": "Price",
+    "username": "9",
     "price": 7
   },
   {
     "id": 5,
     "image": "4.avif",
-    "title": "Foodies",
-    "username": "18k",
+    "title": "Price",
+    "username": "8",
     "price": 4
   },
   {
     "id": 6,
     "image": "5.avif",
-    "title": "Friends",
-    "username": "245k",
+    "title": "Price",
+    "username": "24",
     "price": 80
   },
   {
     "id": 6,
     "image": "9.avif",
-    "title": "flow",
-    "username": "60k",
+    "title": "Price",
+    "username": "6",
     "price": 80
   },
   {
     "id": 6,
     "image": "10.avif",
-    "title": "box",
-    "username": "32k",
+    "title": "Price",
+    "username": "3",
     "price": 80
   }
 ]

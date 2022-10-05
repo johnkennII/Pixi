@@ -1,7 +1,7 @@
 import Button from './Button'
-import { GrView } from 'react-icons/gr'
+import { BiHeart } from "react-icons/bi";
 import data from '../../data/item-nft.json'
-import { GiCrownCoin } from 'react-icons/gi'
+
 
 export default function Collections() {
   return (
@@ -22,14 +22,6 @@ export default function Collections() {
             return (
               <div key={index} data-aos="fade-up" data-aos-duration="3000">
                 <div className="bg-[#2f302f]  rounded-2xl flex flex-col  hover:scale-105 transition-all cursor-pointer  w-[280px] h-[300px]">
-                  <div className="flex  absolute p-2">
-                    <button className="bg-[#2f302f] h-8 p-1 rounded-lg text-white text-xs">
-                      {item.price} Avax
-                    </button>
-                    <div className="bg-[#2f302f] p-2 rounded-full ml-44">
-                      <GiCrownCoin color="#f44336" />
-                    </div>
-                  </div>
                   <img
                     src={`/img/${item.image}`}
                     alt=""
@@ -39,25 +31,27 @@ export default function Collections() {
                     <h6 className="font-primary text-white font-bold text-xl md:text-xl">
                       {item.title}
                     </h6>
-                    <p className="text-[#797d7b]">
-                      <GrView
-                        color="#ECDBBA"
-                        size=".8rem"
-                        style={{
-                          position: 'absolute',
-                          marginLeft: '-17px',
-                          marginTop: '5px',
-                        }}
+                    <p className="text-[#797d7b] flex">
+                      <img
+                        src="https://cryptologos.cc/logos/avalanche-avax-logo.png"
+                        alt="eth"
+                        className="h-5 mr-2"
                       />
                       {item.username}
                     </p>
                   </div>
                   <div className="p-2 flex justify-between">
-                    <h6 className="font-primary text-[#7f8281] font-bold text-sm md:text-sm">
-                      440likes
-                      
+                   
+                    <button
+                className="flex  items-center  px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                onClick={() => buyNFT(nftItem)}
+              >
+                Buy
+              </button>
+              <h6 className="font-primary text-[#7f8281] font-bold text-sm md:text-sm flex">
+                    <span>12</span>
+                    <BiHeart  className='mt-1'/>
                     </h6>
-                    <button className='bg-[#7f8281] w-14 h-5 text-white rounded-md'>Sell</button>
                   </div>
                 </div>
               </div>
