@@ -2,7 +2,7 @@ import connect from "./utils/auth";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import Logo from "../assets/piximarket.svg";
+import Logo from "../assets/logo.png";
 import { BiMenu, BiXCircle } from "react-icons/bi";
 
 export default function Nav() {
@@ -19,15 +19,16 @@ export default function Nav() {
   }
 
   return (
-    <nav className="bg-[#2f302f] px-2 sm:px-2 py-2.5 border-dark">
+    <nav className="bg-[#626362] px-2 sm:px-2 py-2.5 border-dark">
       <div className="container flex flex-wrap justify-between items-center mx-auto">
         <Link href="/">
           <a>
             <div className="flex items-center cursor-pointer">
-              <Image src={Logo} alt="PixiMarket logo" height={40} width={40} />
-              <div className="ml-[0.8rem] text-white font-semibold text-2xl">
-                PixiMarket
-              </div>
+              <Image src={Logo} 
+              alt="PixiMarket logo" 
+              height={30} width={110}
+               />
+            
             </div>
           </a>
         </Link>

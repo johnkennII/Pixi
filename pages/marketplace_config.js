@@ -63,6 +63,8 @@ export default function MarketplaceConfig() {
       signer
     );
 
+    console.log(permission)
+
     let transaction = await contract.grantRole(permission, permissionedAddress);
     await transaction.wait();
   }

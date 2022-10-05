@@ -10,7 +10,7 @@ const calcTimeLeft = t => {
   return left;
 };
 
-export default function useCountdown(endTime) {
+export default function UseCountdown(endTime) {
   const [end, setEndTime] = useState(endTime);
   const [timeLeft, setTimeLeft] = useState(() => calcTimeLeft(end));
 
