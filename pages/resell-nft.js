@@ -45,7 +45,7 @@ export default function ResellNFT() {
   }
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center ">
       <div className="w-1/2 flex flex-col pb-12">
         <input
           placeholder="Asset Price in AVAX"

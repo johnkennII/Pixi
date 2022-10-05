@@ -1,9 +1,81 @@
+import { useState,useEffect } from 'react';
 import Button from './Button'
-import { BiHeart } from "react-icons/bi";
+import { BiHeart } from 'react-icons/bi'
 import data from '../../data/item-nft.json'
+import Web3Modal from "web3modal";
+import { ethers } from "ethers";
+import Marketplace from "../../artifacts/contracts/Marketplace.sol/Marketplace.json";
+import axios from 'axios';
+import NFTCards from "../NFTCards";
 
 
 export default function Collections() {
+  const marketplaceAddress = process.env.MARKETPLACE_ADDRESS;
+  const [nfts, setNfts] = useState([]);
+  const [loadingState, setLoadingState] = useState("not-loaded");
+
+  useEffect(() => {
+    loadNFTs();
+    // console.log("address", address);
+  }, []);
+
+  async function loadNFTs() {
+    /* create a generic provider and query for unsold market items */
+    const web3Modal = new Web3Modal();
+    const connection = await web3Modal.connect();
+    const provider = new ethers.providers.Web3Provider(connection);
+    const marketplaceContract = new ethers.Contract(
+      marketplaceAddress,
+      Marketplace.abi,
+      provider
+    );
+
+    const data = await marketplaceContract.fetchMarketItems();
+
+    const items = await Promise.all(
+      data.map(async (i) => {
+        const tokenUri = await marketplaceContract.tokenURI(i.tokenId);
+        const meta = await axios.get(tokenUri);
+        let price = ethers.utils.formatUnits(i.price.toString(), "ether");
+        console.log("Item price:", price);
+        let item = {
+          price,
+          tokenId: i.tokenId.toNumber(),
+          seller: i.seller,
+          owner: i.owner,
+          nftContract: i.nftContract,
+          image: meta.data.image,
+          name: meta.data.name,
+          description: meta.data.description,
+        };
+        console.log("NFT Items:", item);
+        return item;
+      })
+    );
+    setNfts(items);
+    setLoadingState("loaded");
+  }
+
+  async function buyNFT(nft) {
+    const web3Modal = new Web3Modal()
+    const connection = await web3Modal.connect()
+    const provider = new ethers.providers.Web3Provider(connection)
+    const signer = provider.getSigner()
+
+    const contract = new ethers.Contract(
+      marketplaceAddress,
+      Marketplace.abi,
+      signer,
+    )
+
+    /* user will be prompted to pay the asking proces to complete the transaction */
+    const price = ethers.utils.parseUnits(nft.price.toString(), 'ether')
+    const transaction = await contract.createMarketSale(nft.tokenId, {
+      value: price,
+    })
+    await transaction.wait()
+    loadNFTs()
+  }
   return (
     <>
       <div
@@ -18,43 +90,13 @@ export default function Collections() {
           <Button text="View More" variant="secondary" />
         </div>
         <div className="grid grid-cols-4 gap-4">
-          {data.map((item, index) => {
+          {nfts.map((item, index) => {
             return (
-              <div key={index} data-aos="fade-up" data-aos-duration="3000">
-                <div className="bg-[#2f302f]  rounded-2xl flex flex-col  hover:scale-105 transition-all cursor-pointer  w-[280px] h-[300px]">
-                  <img
-                    src={`/img/${item.image}`}
-                    alt=""
-                    className="h-[220px] rounded-t-xl"
-                  />
-                  <div className="p-2 flex justify-between">
-                    <h6 className="font-primary text-white font-bold text-xl md:text-xl">
-                      {item.title}
-                    </h6>
-                    <p className="text-[#797d7b] flex">
-                      <img
-                        src="https://cryptologos.cc/logos/avalanche-avax-logo.png"
-                        alt="eth"
-                        className="h-5 mr-2"
-                      />
-                      {item.username}
-                    </p>
-                  </div>
-                  <div className="p-2 flex justify-between">
-                   
-                    <button
-                className="flex  items-center  px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                onClick={() => buyNFT(nftItem)}
-              >
-                Buy
-              </button>
-              <h6 className="font-primary text-[#7f8281] font-bold text-sm md:text-sm flex">
-                    <span>12</span>
-                    <BiHeart  className='mt-1'/>
-                    </h6>
-                  </div>
-                </div>
-              </div>
+              <div key={index} className="flex flex-wrap ">
+              {nfts.map((nftItem, id) => (
+                <NFTCards key={id} nftItem={nftItem} loadNFTs={loadNFTs} />
+              ))}
+            </div>
             )
           })}
         </div>

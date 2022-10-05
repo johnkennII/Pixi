@@ -106,7 +106,7 @@ export default function CreateItem() {
   }
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center bg-gray-500">
       <div className="w-1/2 flex flex-col pb-12">
         <input
           placeholder="Asset Name"
