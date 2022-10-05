@@ -30,25 +30,7 @@ const LandingHeader = () => {
               </button>
             </div>
           </div>
-          <div className="rounded-[3rem]">
-            <Image className="rounded-t-lg" src={Pic1} alt="pic1" />
-            <div className="h-20 bg-[#313338] p-4 rounded-b-lg flex items-center text-white">
-              <Image
-                className="h-[2.25rem] rounded-full"
-                src={Pic2}
-                alt="pic2"
-              />
-              <div className="flex flex-col justify-center ml-4">
-                <div className={style.name}>Jolly</div>
-                <a
-                  className="text-[#1868b7]"
-                  href="https://opensea.io/assets/0x495f947276749ce646f68ac8c248420045cb7b5e/2324922113504035910649522729980423429926362207300810036887725141691069366277"
-                >
-                  hola-kanola
-                </a>
-              </div>
-            </div>
-          </div>
+        
         </div>
       </div>
     </div>
